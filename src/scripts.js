@@ -1,18 +1,33 @@
+// import './css/variables.scss';
+// import './css/index.scss';
 import './css/base.scss';
 import './css/styles.scss';
 
-import userData from './data/users';
-import activityData from './data/activity';
-import sleepData from './data/sleep';
-import hydrationData from './data/hydration';
+import fetchData from './allData.js'
+
+let userData;
+let activityData;
+let hydrationData;
+let sleepData;
+
+function loadPage() {
+  test();
+}
+
+
+fetchData().then(data => {
+  userData = data.userData
+  activityData = data.activityData
+  hydrationData = data.hydrationData
+  sleepData = data.sleepData
+  .then(loadPage())
+});
 
 import UserRepository from './UserRepository';
 import User from './User';
 import Activity from './Activity';
 import Hydration from './Hydration';
 import Sleep from './Sleep';
-
-
 
 let userRepository = new UserRepository();
 
@@ -36,6 +51,8 @@ sleepData.forEach(sleep => {
 let user = userRepository.users[0];
 let todayDate = "2019/09/22";
 user.findFriendsNames(userRepository.users);
+
+//JQuery to taget elements
 
 let dailyOz = document.querySelectorAll('.daily-oz');
 let dropdownEmail = document.querySelector('#dropdown-email');
@@ -102,6 +119,8 @@ let trendingStepsPhraseContainer = document.querySelector('.trending-steps-phras
 let trendingStairsPhraseContainer = document.querySelector('.trending-stairs-phrase-container');
 let userInfoDropdown = document.querySelector('#user-info-dropdown');
 
+//JQuery on click to invoke functions
+
 mainPage.addEventListener('click', showInfo);
 profileButton.addEventListener('click', showDropdown);
 stairsTrendingButton.addEventListener('click', updateTrendingStairsDays());
@@ -115,6 +134,8 @@ function flipCard(cardToHide, cardToShow) {
 function showDropdown() {
   userInfoDropdown.classList.toggle('hide');
 }
+
+//Refactor and find reduncancies 
 
 function showInfo() {
   if (event.target.classList.contains('steps-info-button')) {
@@ -172,6 +193,8 @@ function showInfo() {
     flipCard(event.target.parentNode, sleepMainCard);
   }
 }
+
+//Add current class and pass in current class as parameter. 
 
 function updateTrendingStairsDays() {
   user.findTrendingStairsDays();
