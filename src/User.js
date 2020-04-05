@@ -1,3 +1,5 @@
+//pass in class instances to User
+ //this will reduce User properties 
  class User {
   constructor(userData) {
     this.id = userData.id;
@@ -21,6 +23,9 @@
     this.friendsNames = [];
     this.friendsActivityRecords = []
   }
+
+  //transfer methods to new classes
+
   getFirstName() {
     var names = this.name.split(' ');
     return names[0].toUpperCase();
@@ -42,6 +47,9 @@
       return sum
     }, 0)
   }
+
+  //There has to be a better way 
+
   updateSleep(date, hours, quality) {
     this.sleepHoursRecord.unshift({
       'date': date,
@@ -62,6 +70,9 @@
       this.sleepQualityAverage = quality;
     }
   }
+
+  //pass in hours/quality based on which item we are updating 
+
   calculateAverageHoursThisWeek(todayDate) {
     return (this.sleepHoursRecord.reduce((sum, sleepAct) => {
       let index = this.sleepHoursRecord.indexOf(this.sleepHoursRecord.find(sleep => sleep.date === todayDate));
@@ -99,6 +110,8 @@
     }, 0);
     return Math.round(totalMinutes * 7.6);
   }
+
+  //pass in minutes/steps/flights as an argument
   calculateAverageMinutesActiveThisWeek(todayDate) {
     return (this.activityRecord.reduce((sum, activity) => {
       let index = this.activityRecord.indexOf(this.activityRecord.find(activity => activity.date === todayDate));
@@ -162,6 +175,8 @@
       return sum;
     }, 0));
   }
+
+
   findFriendsTotalStepsForWeek(users, date) {
     this.friends.map(friend => {
       let matchedFriend = users.find(user => user.id === friend);
