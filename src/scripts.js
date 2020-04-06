@@ -3,25 +3,25 @@
 import './css/base.scss';
 import './css/styles.scss';
 
-import fetchData from './allData.js'
+// import fetchData from './allData.js'
 
-let userData;
-let activityData;
-let hydrationData;
-let sleepData;
+// let userData;
+// let activityData;
+// let hydrationData;
+// let sleepData;
 
-function loadPage() {
-  test();
-}
+// function loadPage() {
+//   test();
+// }
 
 
-fetchData().then(data => {
-  userData = data.userData
-  activityData = data.activityData
-  hydrationData = data.hydrationData
-  sleepData = data.sleepData
-  .then(loadPage())
-});
+// fetchData().then(data => {
+//   userData = data.userData
+//   activityData = data.activityData
+//   hydrationData = data.hydrationData
+//   sleepData = data.sleepData
+//   .then(loadPage())
+// });
 
 import UserRepository from './UserRepository';
 import User from './User';
@@ -135,7 +135,7 @@ function showDropdown() {
   userInfoDropdown.classList.toggle('hide');
 }
 
-//Refactor and find reduncancies 
+//Refactor and find reduncancies
 
 function showInfo() {
   if (event.target.classList.contains('steps-info-button')) {
@@ -194,7 +194,7 @@ function showInfo() {
   }
 }
 
-//Add current class and pass in current class as parameter. 
+//Add current class and pass in current class as parameter.
 
 function updateTrendingStairsDays() {
   user.findTrendingStairsDays();
@@ -209,6 +209,9 @@ function updateTrendingStepDays() {
 for (var i = 0; i < dailyOz.length; i++) {
   dailyOz[i].innerText = user.addDailyOunces(Object.keys(sortedHydrationDataByDate[i])[0])
 }
+// dailyOz.forEach(oz => {
+//   oz.innerText = user.addDailyOunces(Object.keys(sortedHydrationDataByDate)[0]
+// })
 
 dropdownGoal.innerText = `DAILY STEP GOAL | ${user.dailyStepGoal}`;
 
