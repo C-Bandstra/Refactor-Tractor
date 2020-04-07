@@ -1,14 +1,52 @@
 import './css/base.scss';
 import './css/styles.scss';
+import $ from "jQuery"
 
 const dom = {
 
   load(data) {
-    this.changeText(data);
-
+    this.changeSteps(data);
   },
-  changeText(data) {
-    console.log(data.sleepData)
+
+  changeSteps(data) {
+    this.addUserSteps(data);
+    this.addStepCalendar(data);
+    this.addStepTrending(data);
+    this.addStepInfo(data);
+    this.addfriendsInfo(data);
+  },
+
+  addUserSteps(data) {
+    $('#user-steps-today').text(data.activityData.find(activity => {
+      return activity.userID === data.user.id && activity.date === data.todayDate;
+    }).numSteps);
+  },
+
+  addStepCalendar(data) {
+    $('#steps-calendar-total-active-minutes-weekly').text(data.user.calculateAverageMinutesActiveThisWeek(data.todayDate));
+    $('#steps-calendar-total-steps-weekly').text(data.user.calculateAverageStepsThisWeek(data.todayDate));
+  },
+
+  addStepTrending(data) {
+    $('.steps-trending-button').on('click', function() {
+      data.user.findTrendingStepDays();
+      $('.trending-steps-phrase-container').html(`<p class='trend-line'>${data.user.trendingStepDays[0]}</p>`)
+    });
+  },
+
+  addStepInfo(data) {
+    $('#steps-info-miles-walked-today').text(data.user.activityRecord.find(activity => {
+      return (activity.date === todayDate && activity.userId === data.user.id)
+      $('#steps-info-active-minutes-today').text(data.activityData.find(activity => {
+        return activity.userID === data.user.id && activity.date === todayDate;
+      }).minutesActive);
+    }));
+  },
+
+  addfriendsInfo(data) {
+    $('#steps-friend-active-min-avg-today').text(data.userRepository.calculateAverageMinutesActive(data.todayDate));
+    $('#steps-friend-average-step-goal').text(`${data.userRepository.calculateAverageStepGoal()}`);
+    $('#steps-friend-avg-today').text(data.userRepository.calculateAverageSteps(data.todayDate));
   }
 }
 
@@ -156,8 +194,7 @@ const dom = {
 //   return user.id === userRepository.getWorstSleepers(todayDate)
 // }).getFirstName());
 // $('#sleep-info-hours-average-alltime').text(user.hoursSleptAverage);
-// $('#steps-info-miles-walked-today').text(user.activityRecord.find(activity => {
-//   return (activity.date === todayDate && activity.userId === user.id)
+
 // }).calculateMiles(userRepository));
 // $('#sleep-info-quality-average-alltime').text(user.sleepQualityAverage);
 // $('#sleep-info-quality-today').text(sleepData.find(sleep => {
@@ -169,31 +206,17 @@ const dom = {
 // $('#stairs-calendar-flights-average-weekly').text(user.calculateAverageFlightsThisWeek(todayDate));
 // $('#stairs-calendar-stairs-average-weekly').text((user.calculateAverageFlightsThisWeek(todayDate) * 12).toFixed(0));
 // $('#stairs-friend-flights-average-today').text((userRepository.calculateAverageStairs(todayDate) / 12).toFixed(1));
-// $('#stairs-info-flights-today').text(activityData.find(activity => {
+// $('#stairs-info-flights-today').text(data.activityData.find(activity => {
 //     return activity.userID === user.id && activity.date === todayDate;
 //   }).flightsOfStairs);
-// $('#stairs-user-stairs-today').text(activityData.find(activity => {
+// $('#stairs-user-stairs-today').text(data.activityData.find(activity => {
 //     return activity.userID === user.id && activity.date === todayDate;
 //   }).flightsOfStairs * 12);
-// $('#steps-calendar-total-active-minutes-weekly').text(user.calculateAverageMinutesActiveThisWeek(todayDate));
-// $('#steps-calendar-total-steps-weekly').text(user.calculateAverageStepsThisWeek(todayDate));
 // $('.stairs-trending-button').on('click', function() {
 //   user.findTrendingStairsDays();
 //   $('.trending-stairs-phrase-container').html(`<p class='trend-line'>${user.trendingStairsDays[0]}</p>`);
 //   });
-// $('.steps-trending-button').on('click', function() {
-//   user.findTrendingStepDays();
-//   $('.trending-steps-phrase-container').html(`<p class='trend-line'>${user.trendingStepDays[0]}</p>`);
-//   });
-// $('#steps-friend-active-min-avg-today').text(userRepository.calculateAverageMinutesActive(todayDate));
-// $('#steps-friend-average-step-goal').text(`${userRepository.calculateAverageStepGoal()}`);
-// $('#steps-friend-avg-today').text(userRepository.calculateAverageSteps(todayDate));
-// $('#steps-info-active-minutes-today').text(activityData.find(activity => {
-//   return activity.userID === user.id && activity.date === todayDate;
-// }).minutesActive);
-// $('#user-steps-today').text(activityData.find(activity => {
-//   return activity.userID === user.id && activity.date === todayDate;
-// }).numSteps);
+
 
 // user.findFriendsTotalStepsForWeek(userRepository.users, todayDate);
 
