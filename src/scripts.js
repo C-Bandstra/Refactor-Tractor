@@ -13,6 +13,7 @@ const data = {
   hydrationData: null,
   sleepData: null,
   userRepository: null,
+  todayDate: null
 }
 
 fetchData().then(response => {
@@ -28,6 +29,7 @@ fetchData().then(response => {
     createUserHydration();
     createUserSleep();
     generateUser();
+    createTodayDate();
     dom.load(data);
   })
   .catch(err => console.log(err))
@@ -62,3 +64,7 @@ let createUserSleep = () => {
   })
 }
 
+let createTodayDate = () => {
+  let randomIndex = Math.floor(Math.random() * data.activityData.length);
+  data.todayDate = data.activityData[randomIndex].date;
+}
