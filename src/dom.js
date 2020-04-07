@@ -91,6 +91,39 @@ const dom = {
 
 }
 
+changeHydration(data) {
+  this.addUserHydration(data);
+  // this.addHydrationCalendar(data);
+  // this.addHydrationInfo(data);
+  this.addUserGlasses(data);
+  this.addFriendHydration(data);
+},
+
+
+addUserHydration(data) {
+  $('#hydration-user-ounces-today').text(data.hydrationData.find(hydration => {
+    return hydration.userID === data.user.id && hydration.date === data.todayDate;
+  }).numOunces);
+},
+
+// addHydrationCalendar(data) {
+
+// },
+//
+// addHydrationInfo(data) {
+
+//   },
+
+addUserGlasses(data) {
+  $('#hydration-info-glasses-today').text(data.hydrationData.find(hydration => {
+    return hydration.userID === data.user.id && hydration.date === data.todayDate;
+  }).numOunces / 8)
+},
+
+addFriendHydration(data) {
+  $('#hydration-friend-ounces-today').text(data.userRepository.calculateAverageDailyWater(data.todayDate));
+},
+
 // let user = userRepository.users[0];
 // let todayDate = "2019/09/22";
 // user.findFriendsNames(userRepository.users);
