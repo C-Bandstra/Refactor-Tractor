@@ -25,10 +25,10 @@ fetchData().then(response => {
   .then( () => {
     data.userRepository = new UserRepository()
     createUsers();
+    generateUser();
     createUserActivities();
     createUserHydration();
     createUserSleep();
-    generateUser();
     createTodayDate();
     dom.load(data);
   })
@@ -37,6 +37,7 @@ fetchData().then(response => {
 let generateUser = () => {
   let random = Math.floor(Math.random() * data.userRepository.users.length)
   data.user = new User(data.userRepository.users[random])
+  data.user.calculateAverageHoursThisWeek(data.todayDate);
 }
 
 let createUsers = () => {
@@ -60,8 +61,10 @@ let createUserHydration = () => {
 
 let createUserSleep = () => {
   data.sleepData.forEach(sleep => {
-    sleep = new Sleep(sleep, data.userRepository);
+    data.sleep = new Sleep(sleep, data.user);
   })
+  // console.log(data.sleep);
+  // console.log(data.user.sleepQualityAverage);
 }
 
 let createTodayDate = () => {

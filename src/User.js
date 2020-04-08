@@ -1,5 +1,5 @@
 //pass in class instances to User
- //this will reduce User properties 
+ //this will reduce User properties
  class User {
   constructor(userData) {
     this.id = userData.id;
@@ -48,7 +48,7 @@
     }, 0)
   }
 
-  //There has to be a better way 
+  //There has to be a better way
 
   updateSleep(date, hours, quality) {
     this.sleepHoursRecord.unshift({
@@ -61,6 +61,7 @@
     });
     if(this.sleepHoursRecord.length) {
       this.hoursSleptAverage = ((hours + (this.hoursSleptAverage * (this.sleepHoursRecord.length - 1))) / this.sleepHoursRecord.length).toFixed(1);
+      console.log(this.hoursSleptAverage);
     } else {
       this.hoursSleptAverage = hours;
     }
@@ -69,9 +70,10 @@
     } else {
       this.sleepQualityAverage = quality;
     }
+    // console.log(this.hoursSleptAverage);
   }
 
-  //pass in hours/quality based on which item we are updating 
+  //pass in hours/quality based on which item we are updating
 
   calculateAverageHoursThisWeek(todayDate) {
     return (this.sleepHoursRecord.reduce((sum, sleepAct) => {
