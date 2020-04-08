@@ -1,12 +1,20 @@
 import './css/base.scss';
 import './css/styles.scss';
+
 import $ from "jQuery"
+
+// let activityData;	import userData from './data/users';
+// let hydrationData;	import activityData from './data/activity';
+// let sleepData;	import sleepData from './data/sleep';
+// import hydrationData from './data/hydration';
 
 const dom = {
 
   load(data) {
+    console.log(data.user);
     this.changeSteps(data);
     this.changeSleep(data);
+    this.changeHydration(data);
   },
 
   changeSteps(data) {
@@ -53,9 +61,9 @@ const dom = {
 
   changeSleep(data) {
     this.addUserSleep(data);
-    this.addSleepCalendar(data);
-    this.addSleepInfo(data);
     this.addFriendSleepInfo(data);
+    this.addSleepInfo(data);
+    this.addSleepCalendar(data);
   },
 
   addUserSleep(data) {
@@ -67,62 +75,64 @@ const dom = {
     }).hoursSlept)
   },
 
+  addSleepInfo(data) {
+    //this is calculating the avg for every user, so it's not happening in time
+    //to print
+    $('#sleep-info-hours-average-alltime').text(data.user.hoursSleptAverage);
+    console.log(data.user.hoursSleptAverage);
+    // $('#sleep-info-hours-average-alltime').text('catsssss');
+    $('#sleep-info-quality-average-alltime').text(data.user.sleepQualityAverage);
+  },
+
   addSleepCalendar(data) {
+    //same as above
     $('#sleep-calendar-hours-average-weekly').text(data.user.calculateAverageHoursThisWeek(data.todayDate));
     $('#sleep-calendar-quality-average-weekly').text(data.user.calculateAverageQualityThisWeek(data.todayDate));
   },
 
-  addSleepInfo(data) {
-    //maybe we need to invoke the updateSleep method in User class, which is invokes
-    //in sleep class in sleep(userRep) method but don't know where that's invoked
-    console.log($('#sleep-info-hours-average-alltime').text(data.user.hoursSleptAverage));
-    $('#sleep-info-hours-average-alltime').text(data.user.hoursSleptAverage);
-    $('#sleep-info-quality-average-alltime').text(data.user.sleepQualityAverage);
-  },
-
   addFriendSleepInfo(data) {
+    console.log(data.user.hoursSleptAverage);
     $('#sleep-friend-longest-sleeper').text(data.userRepository.users.find(user => {
-        return user.id === data.userRepository.getLongestSleepers(data.todayDate)
-      }).getFirstName());
+      return user.id === data.userRepository.getLongestSleepers(data.todayDate)
+    }).getFirstName());
     $('#sleep-friend-worst-sleeper').text(data.userRepository.users.find(user => {
       return user.id === data.userRepository.getWorstSleepers(data.todayDate)
     }).getFirstName());
-  }
+  },
 
+  changeHydration(data) {
+    this.addUserHydration(data);
+    // this.addHydrationCalendar(data);
+    // this.addHydrationInfo(data);
+    this.addUserGlasses(data);
+    this.addFriendHydration(data);
+  },
+
+  addUserHydration(data) {
+    $('#hydration-user-ounces-today').text(data.hydrationData.find(hydration => {
+      return hydration.userID === data.user.id && hydration.date === data.todayDate;
+    }).numOunces);
+  },
+
+  // addHydrationCalendar(data) {
+
+    // },
+    //
+    // addHydrationInfo(data) {
+
+      //   },
+
+  addUserGlasses(data) {
+    $('#hydration-info-glasses-today').text(data.hydrationData.find(hydration => {
+      return hydration.userID === data.user.id && hydration.date === data.todayDate;
+    }).numOunces / 8)
+  },
+
+  addFriendHydration(data) {
+    $('#hydration-friend-ounces-today').text(data.userRepository.calculateAverageDailyWater(data.todayDate));
+  }
 }
 
-changeHydration(data) {
-  this.addUserHydration(data);
-  // this.addHydrationCalendar(data);
-  // this.addHydrationInfo(data);
-  this.addUserGlasses(data);
-  this.addFriendHydration(data);
-},
-
-
-addUserHydration(data) {
-  $('#hydration-user-ounces-today').text(data.hydrationData.find(hydration => {
-    return hydration.userID === data.user.id && hydration.date === data.todayDate;
-  }).numOunces);
-},
-
-// addHydrationCalendar(data) {
-
-// },
-//
-// addHydrationInfo(data) {
-
-//   },
-
-addUserGlasses(data) {
-  $('#hydration-info-glasses-today').text(data.hydrationData.find(hydration => {
-    return hydration.userID === data.user.id && hydration.date === data.todayDate;
-  }).numOunces / 8)
-},
-
-addFriendHydration(data) {
-  $('#hydration-friend-ounces-today').text(data.userRepository.calculateAverageDailyWater(data.todayDate));
-},
 
 // let user = userRepository.users[0];
 // let todayDate = "2019/09/22";
@@ -177,6 +187,36 @@ function flipCard(cardToHide, cardToShow) {
 }
 
 //Refactor and find reduncancies
+
+/*
+$(.main).on('click', function(event) {
+  if ($(event.target).parent().hasClass("stairs-main-card")) {
+    clickStairsCard(event);
+  }) if else ($(event.target).parent().hasClass("steps-main-card")) {
+    clickStepsCard(event);
+  }) if else ($(event.target).parent().hasClass("sleep-main-card")) {
+    clickSleepCard(event);
+  } if else ($(event.target).parent().hasClass("hydration-main-card")) {
+    clickHydrationCard(event);
+  }
+
+function clickStairsCard(event) {
+  let stepsMainCard = $('#steps-main-card');
+  if ($(event.target).hasClass('steps-info-button')) {
+    flipCard(stepsMainCard, $('#steps-info-card'));
+  } if else ($(event.target).hasClass('steps-friends-button')) {
+    flipCard(stepsMainCard, $('#steps-friends-card'));
+  } if else ($(event.target).hasClass('steps-trending-button')) {
+    flipCard(stepsMainCard, $('#steps-trending-card'));
+  } if else ($(event.target).hasClass('steps-calendar-button')) {
+    flipCard(stepsMainCard, $('#steps-calendar-card'));
+  } if else ($(event.target).hasClass('steps-go-back-button')) {
+    flipCard(($(event.target).parent()), stepsMainCard);
+  }
+}
+
+
+*/
 
 function showInfo() {
   if (event.target.classList.contains('steps-info-button')) {
