@@ -1,0 +1,38 @@
+//Variables
+$body: #1F1F1F;
+$h1-color: #fff;
+$steps: #F5634B;
+$hydration: #54C6BE;
+$stairs: #8975b2;
+$sleep: #FBD089;
+$green: green;
+$red: red;
+$yellow: #F8BA00;
+$go-back: '../images/goback.png';
+$info: '../images/info.png';
+$friends: '../images/friends.png';
+$calendar: '../images/calendar.png';
+$trending: '../images/trending.png';
+$main-text: Oswald, sans-serif;
+$secondary-text: Work Sans, sans-serif;
+//Functions
+@mixin go-back-image($go-back) {
+  background-image: url($go-back);
+  background-color: inherit;
+}
+@mixin info-image($info) {
+  background-image: url($info);
+  background-color: inherit;
+}
+@mixin friends-image($friends) {
+  background-image: url($friends);
+  background-color: inherit;
+}
+@mixin calendar-image($calendar) {
+  background-image: url($calendar);
+  background-color: inherit;
+}
+@mixin trending-image($trending) {
+  background-image: url($trending);
+  background-color: inherit;
+}
