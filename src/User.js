@@ -61,7 +61,6 @@
     });
     if(this.sleepHoursRecord.length) {
       this.hoursSleptAverage = ((hours + (this.hoursSleptAverage * (this.sleepHoursRecord.length - 1))) / this.sleepHoursRecord.length).toFixed(1);
-      console.log(this.hoursSleptAverage);
     } else {
       this.hoursSleptAverage = hours;
     }
@@ -70,7 +69,6 @@
     } else {
       this.sleepQualityAverage = quality;
     }
-    // console.log(this.hoursSleptAverage);
   }
 
   //pass in hours/quality based on which item we are updating

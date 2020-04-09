@@ -63,8 +63,6 @@ let createUserSleep = () => {
   data.sleepData.forEach(sleep => {
     data.sleep = new Sleep(sleep, data.user);
   })
-  // console.log(data.sleep);
-  // console.log(data.user.sleepQualityAverage);
 }
 
 let createTodayDate = () => {
