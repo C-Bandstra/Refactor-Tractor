@@ -5,6 +5,9 @@ import Activity from './Activity';
 import Hydration from './Hydration';
 import Sleep from './Sleep';
 import dom from './dom.js';
+// import styles from './css/styles.scss';
+// import './css/base.scss';
+import './css/base.scss';
 
 const data = {
   user: null,
