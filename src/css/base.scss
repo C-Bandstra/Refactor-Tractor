@@ -336,7 +336,7 @@ main {
 ///// Input section -------
 
 .switch-field {
-  margin: 30px auto;
+  margin: 10px auto 40px auto;
 }
 
 .switch-field input {
@@ -393,14 +393,11 @@ main {
   padding: 20px;
 }
 
-// #sleep-quality {
-//   width: 133.98px;
-// }
-
 .sleep-input label,
 .activity-input label,
 .hydration-input label {
   display: inline-block;
+  margin-left: 30px;
 }
 
 .sleep-input input,

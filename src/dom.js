@@ -18,6 +18,7 @@ const dom = {
     this.populateNavBar(data);
     this.hideInputs();
     console.log(data.user);
+    console.log(data.userRepository);
   },
 
   changeSteps(data) {
@@ -180,83 +181,6 @@ const dom = {
 
 };
 
-////i think we should move all event handlers to script
-
-$('#profile-button').on('click', function(event) {
-  $('#user-info-dropdown').toggleClass('hide');
-  })
-
-function flipCard(cardToHide, cardToShow) {
-  cardToHide.classList.add('hide');
-  cardToShow.classList.remove('hide');
-}
-
-$('.main').on('click', function(event) {
-  if (event.target.parentNode.parentNode.id === 'stairs-main-card' ||
-    $(event.target).hasClass('go-back-button')) {
-    clickStairsCard(event);
-  }
-  if (event.target.parentNode.parentNode.id === 'steps-main-card' ||
-    $(event.target).hasClass('go-back-button')) {
-    clickStepsCard(event);
-  }
-  if (event.target.parentNode.parentNode.id === 'hydration-main-card' ||
-    $(event.target).hasClass('go-back-button')) {
-    clickHydrationCard(event);
-  }
-  if (event.target.parentNode.parentNode.id === 'sleep-main-card' ||
-    $(event.target).hasClass('go-back-button')) {
-    clickSleepCard(event);
-  }
-})
-
-function clickStairsCard(event) {
-  let stairsMainCard = $('#stairs-main-card');
-  let buttonCard = $(`#${event.target.dataset.card}-card`);
-  if ($(event.target).hasClass(`${event.target.dataset.card}-button`) &&
-    event.target.dataset.card !== 'go-back') {
-    flipCard(stairsMainCard[0], buttonCard[0]);
-  }
-  if ($(event.target).hasClass('stairs-go-back-button')) {
-    flipCard(event.target.parentNode, stairsMainCard[0]);
-  }
-}
-
-function clickStepsCard(event) {
-  let stepsMainCard = $('#steps-main-card');
-  let buttonCard = $(`#${event.target.dataset.card}-card`);
-  if ($(event.target).hasClass(`${event.target.dataset.card}-button`) &&
-    event.target.dataset.card !== 'go-back') {
-    flipCard(stepsMainCard[0], buttonCard[0]);
-  }
-  if ($(event.target).hasClass('steps-go-back-button')) {
-    flipCard(event.target.parentNode, stepsMainCard[0]);
-  }
-}
-
-function clickHydrationCard(event) {
-  let hydrationMainCard = $('#hydration-main-card');
-  let buttonCard = $(`#${event.target.dataset.card}-card`);
-  if ($(event.target).hasClass(`${event.target.dataset.card}-button`) &&
-    event.target.dataset.card !== 'go-back') {
-    flipCard(hydrationMainCard[0], buttonCard[0]);
-  }
-  if ($(event.target).hasClass('hydration-go-back-button'))  {
-    flipCard(event.target.parentNode, hydrationMainCard[0]);
-  }
-}
-
-function clickSleepCard(event) {
-  let sleepMainCard = $('#sleep-main-card');
-  let buttonCard = $(`#${event.target.dataset.card}-card`);
-  if ($(event.target).hasClass(`${event.target.dataset.card}-button`) &&
-    event.target.dataset.card !== 'go-back') {
-    flipCard(sleepMainCard[0], buttonCard[0]);
-  }
-  if ($(event.target).hasClass('sleep-go-back-button')) {
-    flipCard(event.target.parentNode, sleepMainCard[0]);
-  }
-}
 
 // ----- I think we can delete the following:
 
