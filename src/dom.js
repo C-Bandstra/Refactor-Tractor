@@ -36,13 +36,13 @@ const dom = {
   },
 
   addStepCalendar(data) {
-    $('#steps-calendar-total-active-minutes-weekly').text(data.user.calculateAverageMinutesActiveThisWeek(data.todayDate));
-    $('#steps-calendar-total-steps-weekly').text(data.user.calculateAverageStepsThisWeek(data.todayDate));
+    $('#steps-calendar-total-active-minutes-weekly').text(data.user.calculateWeeklyAverage(data.user.activityRecord, 'minutesActive', data.todayDate));
+    $('#steps-calendar-total-steps-weekly').text(data.user.calculateWeeklyAverage(data.user.activityRecord, 'steps', data.todayDate));
   },
 
   addStepTrending(data) {
     $('.steps-trending-button').on('click', function() {
-      data.user.findTrendingStepDays();
+      data.user.findTrending('trendingStepDays', 'steps', 'step');
       $('.trending-steps-phrase-container').html(`<p class='trend-line'>${data.user.trendingStepDays[0]}</p>`)
     });
   },
@@ -86,8 +86,8 @@ const dom = {
 
   addSleepCalendar(data) {
     //same as above
-    $('#sleep-calendar-hours-average-weekly').text(data.user.calculateAverageHoursThisWeek(data.todayDate));
-    $('#sleep-calendar-quality-average-weekly').text(data.user.calculateAverageQualityThisWeek(data.todayDate));
+    $('#sleep-calendar-hours-average-weekly').text(data.user.calculateWeeklyAverage(data.user.sleepHoursRecord, 'hours', data.todayDate));
+    $('#sleep-calendar-quality-average-weekly').text(data.user.calculateWeeklyAverage(data.user.sleepQualityRecord, 'quality', data.todayDate));
   },
 
   addFriendSleepInfo(data) {
@@ -146,13 +146,13 @@ const dom = {
   },
 
   addStairCalendar(data) {
-    $('#stairs-calendar-flights-average-weekly').text(data.user.calculateAverageFlightsThisWeek(data.todayDate));
-    $('#stairs-calendar-stairs-average-weekly').text((data.user.calculateAverageFlightsThisWeek(data.todayDate) * 12).toFixed(0))
+    $('#stairs-calendar-flights-average-weekly').text(data.user.calculateWeeklyAverage(data.user.activityRecord, 'flightsOfStairs', data.todayDate));
+    $('#stairs-calendar-stairs-average-weekly').text((data.user.calculateWeeklyAverage(data.user.activityRecord, 'flightsOfStairs', data.todayDate) * 12).toFixed(0))
   },
 
   addStairTrending(data) {
     $('.stairs-trending-button').on('click', function() {
-      data.user.findTrendingStairsDays();
+      data.user.findTrending('trendingStairsDays', 'flightsOfStairs', 'climbing');
         $('.trending-stairs-phrase-container').html(`<p class='trend-line'>${data.user.trendingStairsDays[0]}</p>`);
       });
   },
