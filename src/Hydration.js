@@ -1,15 +1,12 @@
 class Hydration {
-  constructor(data, userRepository) {
-    this.userId = data.userID;
-    this.date = data.date;
-    this.ounces = data.numOunces;
-    this.drink(userRepository);
+  constructor(user, current) {
+    this.user = user;
+    this.date = current.date;
+    this.ounces = current.numOunces;
+    this.drink();
   }
-  drink(userRepo) {
-    var hydrate = this;
-    userRepo.users.find(function(user) {
-      return user.id === hydrate.userId;
-    }).updateHydration(this.date, this.ounces);
+  drink() {
+    this.user.updateHydration(this.date, this.ounces)
   }
 }
 
