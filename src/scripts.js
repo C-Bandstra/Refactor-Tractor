@@ -61,72 +61,87 @@ $('.switch-field').on('click', function(event) {
   }
 })
 
-// submit sleep data ------
+// submit sleep, activity and hydration data ------
 
 $('.sleep-submit-btn').on('click', function() {
+  event.preventDefault();
   if ($('#sleep-date').val().length === 10 && $('#sleep-hours').val().length >= 1 &&
-    $('#sleep-quality').val().length === 1) {
-    // fetch("https://fe-apps.herokuapp.com/api/v1/fitlit/1908/sleep/sleepData", {
-    //   method: 'POST',
-    //   headers: {
-    //   	'Content-Type': 'application/json'
-    //   },
-    //   body: JSON.stringify({
-    //     "userID": data.user.id,
-    //     "date": $('#sleep-date').val().split('-').join('/'),
-    //     "hoursSlept": $('#sleep-hours').val(),
-    //     "sleepQuality": $('#sleep-quality').val()
-    //   }),
-    // })
-    //   .then(response => response.json())
-    //   .then(json => console.log('Request success: ', json))
-    //   .catch(err => console.log('Request failure: ', error));
+    $('#sleep-quality').val().length >= 1 && $('#sleep-quality').val() <= 5) {
+    fetch("https://fe-apps.herokuapp.com/api/v1/fitlit/1908/sleep/sleepData", {
+      method: 'POST',
+      headers: {
+      	'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        "userID": data.user.id,
+        "date": $('#sleep-date').val().split('-').join('/'),
+        "hoursSlept": parseInt($('#sleep-hours').val()),
+        "sleepQuality": parseInt($('#sleep-quality').val())
+      }),
+    })
+      .then(response => response.json())
+      .then(json => {
+        console.log('Request success: ', json)
+        $('.sleep-input').find('input').val('')
+      })
+      .catch(err => console.log('Request failure: ', error));
+      window.alert('Your info has been submitted!');
   } else {
     window.alert('Please use the correct input format');
   }
 })
 
 $('.activity-submit-btn').on('click', function() {
+  event.preventDefault();
   if ($('#activity-date').val().length === 10 && $('#total-steps').val().length >= 1 &&
     $('#minutes-active').val().length >= 1 && $('#stair-flights').val().length >= 1) {
-    // fetch("https://fe-apps.herokuapp.com/api/v1/fitlit/1908/activity/activityData", {
-    //   method: 'POST',
-    //   headers: {
-    //   	'Content-Type': 'application/json'
-    //   },
-    //   body: JSON.stringify({
-    //     "userID": data.user.id,
-    //     "date": $('#activity-date').val().split('-').join('/'),
-    //     "numSteps": $('#total-steps').val(),
-    //     "minutesActive": $('#minutes-active').val(),
-    //     "flightsOfStairs": $('#stair-flights').val()
-    //   }),
-    // })
-    // .then(response => response.json())
-    // .then(json => console.log('Request success: ', json))
-    // .catch(err => console.log('Request failure: ', error));
+    fetch("https://fe-apps.herokuapp.com/api/v1/fitlit/1908/activity/activityData", {
+      method: 'POST',
+      headers: {
+      	'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        "userID": data.user.id,
+        "date": $('#activity-date').val().split('-').join('/'),
+        "numSteps": parseInt($('#total-steps').val()),
+        "minutesActive": parseInt($('#minutes-active').val()),
+        "flightsOfStairs": parseInt($('#stair-flights').val())
+      }),
+    })
+    .then(response => response.json())
+    .then(json => {
+      console.log('Request success: ', json)
+      $('.activity-input').find('input').val('')
+    })
+    .catch(err => console.log('Request failure: ', error));
+    window.alert('Your info has been submitted!');
   } else {
     window.alert('Please use the correct input format');
   }
 })
 
 $('.hydration-submit-btn').on('click', function() {
+   event.preventDefault();
   if ($('#hydrate-date').val().length === 10 &&
     $('#total-ounces').val().length >= 1) {
-    // fetch("https://fe-apps.herokuapp.com/api/v1/fitlit/1908/hydration/hydrationData", {
-    //   method: 'POST',
-    //   headers: {
-    //   	'Content-Type': 'application/json'
-    //   },
-    //   body: JSON.stringify({
-    //       "userID": data.user.id,
-    //       "date": $('#hydration-date').val().split('-').join('/'),
-    //       "numOunces": $('#total-ounces').val()
-    //   }),
-    // })
-    // .then(response => response.json())
-    // .then(json => console.log('Request success: ', json))
-    // .catch(err => console.log('Request failure: ', error));
+    fetch("https://fe-apps.herokuapp.com/api/v1/fitlit/1908/hydration/hydrationData", {
+      method: 'POST',
+      headers: {
+      	'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+          "userID": data.user.id,
+          "date": $('#hydrate-date').val().split('-').join('/'),
+          "numOunces": parseInt($('#total-ounces').val())
+      }),
+    })
+    .then(response => response.json())
+    .then(json => {
+      console.log('Request success: ', json)
+      $('.hydration-input').find('input').val('')
+    })
+    .catch(err => console.log('Request failure: ', error));
+    window.alert('Your info has been submitted!');
   } else {
     window.alert('Please use the correct input format');
   }
