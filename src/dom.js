@@ -19,6 +19,7 @@ const dom = {
     this.hideInputs();
     console.log(data.user);
     console.log(data.userRepository);
+    console.log(data.sleepData);
   },
 
   changeSteps(data) {
