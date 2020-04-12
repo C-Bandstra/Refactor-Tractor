@@ -1,9 +1,9 @@
 class Sleep { // instance for the user's sleep each day
-  constructor(data, user) {
+  constructor(user, current) {
     this.user = user;
-    this.date = data.date;
-    this.hoursSlept = data.hoursSlept;
-    this.sleepQuality = data.sleepQuality;
+    this.date = current.date;
+    this.hoursSlept = current.hoursSlept;
+    this.sleepQuality = current.sleepQuality;
     this.sleep();
   }
   sleep() {
