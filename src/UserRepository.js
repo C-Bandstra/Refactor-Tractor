@@ -81,7 +81,7 @@ class UserRepository {
 
   findBestSleepers(date) {
     return this.users.filter(user => {
-      return user.calculateAverageQualityThisWeek(date) > 3;
+      return user.calculateWeeklyAverage(user.sleepHoursRecord, 'hours', date) > 3;
     })
   }
 
