@@ -5,6 +5,7 @@ import Activity from './Activity';
 import Hydration from './Hydration';
 import Sleep from './Sleep';
 import dom from './dom.js';
+import $ from "jQuery"
 // import styles from './css/styles.scss';
 // import './css/base.scss';
 import './css/base.scss';
@@ -72,3 +73,97 @@ let createTodayDate = () => {
   let randomIndex = Math.floor(Math.random() * data.activityData.length);
   data.todayDate = data.activityData[randomIndex].date;
 }
+
+// event listeners ---------
+
+$('.switch-field').on('click', function(event) {
+  if (event.target.id === 'sleep') {
+    $('.sleep-input').removeClass('hide')
+    $('.activity-input').addClass('hide')
+    $('.hydration-input').addClass('hide')
+  }
+   if (event.target.id === 'activity') {
+    $('.sleep-input').addClass('hide')
+    $('.activity-input').removeClass('hide')
+    $('.hydration-input').addClass('hide')
+  }
+   if (event.target.id === 'hydration') {
+    $('.sleep-input').addClass('hide')
+    $('.activity-input').addClass('hide')
+    $('.hydration-input').removeClass('hide')
+  }
+})
+
+// submit sleep data ------
+
+$('.sleep-submit-btn').on('click', function() {
+  console.log(data.user.id);
+  console.log($('#sleep-date').val());
+  console.log($('#sleep-hours').val());
+  console.log($('#sleep-quality').val());
+//  console.log(
+//    fetch("https://fe-apps.herokuapp.com/api/v1/fitlit/1908/sleep/sleepData", {
+//   method: 'POST',
+//   headers: {
+//   	'Content-Type': 'application/json'
+//   },
+//   body: JSON.stringify({
+//     "userID": data.user.id,
+//     "date": $('#sleep-date').val(),
+//     "hoursSlept": $('#sleep-hours').val(),
+//     "sleepQuality": $('#sleep-quality').val()
+//   }),
+// })
+//   .then(response => response.json())
+//   .then(json => console.log('Request success: ', json))
+//   .catch(err => console.log('Request failure: ', error));
+//  )
+})
+
+$('.activity-submit-btn').on('click', function() {
+  console.log(data.user.id);
+  console.log($('#activity-date').val());
+  console.log($('#total-steps').val());
+  console.log($('#stair-flights').val());
+  console.log($('#minutes-active').val());
+//  console.log(
+//   fetch("https://fe-apps.herokuapp.com/api/v1/fitlit/1908/activity/activityData", {
+//   method: 'POST',
+//   headers: {
+//   	'Content-Type': 'application/json'
+//   },
+//   body: JSON.stringify({
+//     "userID": data.user.id,
+//     "date": $('#activity-date').val(),
+//     "numSteps": $('#total-steps').val(),
+//     "minutesActive": $('#minutes-active').val(),
+//     "flightsOfStairs": $('#stair-flights').val()
+//   }),
+// })
+//   .then(response => response.json())
+//   .then(json => console.log('Request success: ', json))
+//   .catch(err => console.log('Request failure: ', error));
+//  )
+})
+
+$('.hydration-submit-btn').on('click', function() {
+  console.log(data.user.id);
+  console.log($('#total-ounces').val());
+  console.log($('#hydration-date').val());
+//  console.log(
+//   fetch("https://fe-apps.herokuapp.com/api/v1/fitlit/1908/hydration/hydrationData", {
+//   method: 'POST',
+//   headers: {
+//   	'Content-Type': 'application/json'
+//   },
+//   body: JSON.stringify({
+//       "userID": data.user.id,
+//       "date": $('#hydration-date').val(),
+//       "numOunces": $('#total-ounces').val()
+//   }),
+// })
+//   .then(response => response.json())
+//   .then(json => console.log('Request success: ', json))
+//   .catch(err => console.log('Request failure: ', error));
+//  )
+})

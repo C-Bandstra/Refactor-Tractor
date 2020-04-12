@@ -16,6 +16,8 @@ const dom = {
     this.changeHydration(data);
     this.changeStairs(data);
     this.populateNavBar(data);
+    this.hideInputs();
+    console.log(data.user);
   },
 
   changeSteps(data) {
@@ -77,11 +79,7 @@ const dom = {
   },
 
   addSleepInfo(data) {
-    //this is calculating the avg for every user, so it's not happening in time
-    //to print
     $('#sleep-info-hours-average-alltime').text(data.user.hoursSleptAverage);
-    console.log(data.user.hoursSleptAverage);
-    // $('#sleep-info-hours-average-alltime').text('catsssss');
     $('#sleep-info-quality-average-alltime').text(data.user.sleepQualityAverage);
   },
 
@@ -113,10 +111,10 @@ const dom = {
       return hydration.userID === data.user.id && hydration.date === data.todayDate;
     }).numOunces);
   },
-
-  // addHydrationCalendar(data) {
-
-    // },
+//
+//   addHydrationCalendar(data) {
+//
+// },
     //
     // addHydrationInfo(data) {
 
@@ -173,11 +171,18 @@ const dom = {
     $('#dropdown-goal').text(`DAILY STEP GOAL | ${data.user.dailyStepGoal}`);
     $('#dropdown-email').text(`EMAIL | ${data.user.email}`)
     $('#dropdown-name').text(`${data.user.name.toUpperCase()}`)
+  },
+
+  hideInputs() {
+    $('.activity-input').addClass('hide')
+    $('.hydration-input').addClass('hide')
   }
+
 };
 
+////i think we should move all event handlers to script
+
 $('#profile-button').on('click', function(event) {
-  $('#user-info-dropdown').toggleClass('hide');
   $('#user-info-dropdown').toggleClass('hide');
   })
 
@@ -187,19 +192,19 @@ function flipCard(cardToHide, cardToShow) {
 }
 
 $('.main').on('click', function(event) {
-  if (event.target.parentNode.parentNode.id == 'stairs-main-card' ||
+  if (event.target.parentNode.parentNode.id === 'stairs-main-card' ||
     $(event.target).hasClass('go-back-button')) {
     clickStairsCard(event);
   }
-  if (event.target.parentNode.parentNode.id == 'steps-main-card' ||
+  if (event.target.parentNode.parentNode.id === 'steps-main-card' ||
     $(event.target).hasClass('go-back-button')) {
     clickStepsCard(event);
   }
-  if (event.target.parentNode.parentNode.id == 'hydration-main-card' ||
+  if (event.target.parentNode.parentNode.id === 'hydration-main-card' ||
     $(event.target).hasClass('go-back-button')) {
     clickHydrationCard(event);
   }
-  if (event.target.parentNode.parentNode.id == 'sleep-main-card' ||
+  if (event.target.parentNode.parentNode.id === 'sleep-main-card' ||
     $(event.target).hasClass('go-back-button')) {
     clickSleepCard(event);
   }
@@ -210,7 +215,8 @@ function clickStairsCard(event) {
   let buttonCard = $(`#${event.target.dataset.card}-card`);
   if ($(event.target).hasClass(`${event.target.dataset.card}-button`) &&
     event.target.dataset.card !== 'go-back') {
-    flipCard(stairsMainCard[0], buttonCard[0]);   }
+    flipCard(stairsMainCard[0], buttonCard[0]);
+  }
   if ($(event.target).hasClass('stairs-go-back-button')) {
     flipCard(event.target.parentNode, stairsMainCard[0]);
   }
@@ -330,15 +336,6 @@ function clickSleepCard(event) {
 // let sleepFriendsCard = document.querySelector('#sleep-friends-card');
 // let sleepInfoCard = document.querySelector('#sleep-info-card');
 // let sleepMainCard = document.querySelector('#sleep-main-card');
-// let sortedHydrationDataByDate = user.ouncesRecord.sort((a, b) => {
-//   if (Object.keys(a)[0] > Object.keys(b)[0]) {
-//     return -1;
-//   }
-//   if (Object.keys(a)[0] < Object.keys(b)[0]) {
-//     return 1;
-//   }
-//   return 0;
-// });
 // let stairsCalendarCard = document.querySelector('#stairs-calendar-card');
 // let stepsMainCard = document.querySelector('#steps-main-card');
 // let stepsInfoCard = document.querySelector('#steps-info-card');
