@@ -48,17 +48,17 @@ const dom = {
 
   addStepInfo(data) {
     $('#steps-info-miles-walked-today').text(data.user.activityRecord.find(activity => {
-     return (activity.date === data.todayDate && activity.userId === data.user.id)
-    }))
+     return (activity.date === data.todayDate && activity.user.id === data.user.id)
+    }).calculateMiles())
     $('#steps-info-active-minutes-today').text(data.activityData.find(activity => {
      return activity.userID === data.user.id && activity.date === data.todayDate;
     }).minutesActive);
   },
 
   stepFriendsInfo(data) {
-    $('#steps-friend-active-min-avg-today').text(data.userRepository.calculateAverageMinutesActive(data.todayDate));
+    $('#steps-friend-active-min-avg-today').text(data.userRepository.activityAverage('steps', data.todayDate));
     $('#steps-friend-average-step-goal').text(`${data.userRepository.calculateAverageStepGoal()}`);
-    $('#steps-friend-avg-today').text(data.userRepository.calculateAverageSteps(data.todayDate));
+    $('#steps-friend-avg-today').text(data.userRepository.activityAverage('steps', data.todayDate));
     data.user.findFriendsTotalStepsForWeek(data.userRepository.users, data.todayDate);
   },
 
@@ -157,7 +157,7 @@ const dom = {
   },
 
   stairFriendsInfo(data) {
-    $('#stairs-friend-flights-average-today').text((data.userRepository.calculateAverageStairs(data.todayDate) / 12).toFixed(1));
+    $('#stairs-friend-flights-average-today').text((data.userRepository.activityAverage('flightsOfStairs', data.todayDate) / 12).toFixed(1));
   },
 
   addStairInfo(data) {
@@ -336,6 +336,15 @@ function clickSleepCard(event) {
 // let sleepFriendsCard = document.querySelector('#sleep-friends-card');
 // let sleepInfoCard = document.querySelector('#sleep-info-card');
 // let sleepMainCard = document.querySelector('#sleep-main-card');
+// let sortedHydrationDataByDate = data.user.ouncesRecord.sort((a, b) => {
+//   if (Object.keys(a)[0] > Object.keys(b)[0]) {
+//     return -1;
+//   }
+//   if (Object.keys(a)[0] < Object.keys(b)[0]) {
+//     return 1;
+//   }
+//   return 0;
+// });
 // let stairsCalendarCard = document.querySelector('#stairs-calendar-card');
 // let stepsMainCard = document.querySelector('#steps-main-card');
 // let stepsInfoCard = document.querySelector('#steps-info-card');
