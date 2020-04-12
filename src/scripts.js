@@ -1,6 +1,9 @@
 import fetchData from './allData.js'
 import UserRepository from './UserRepository';
 import dom from './dom.js';
+// import styles from './css/styles.scss';
+// import './css/base.scss';
+import './css/base.scss';
 
 const data = {
   user: null,
