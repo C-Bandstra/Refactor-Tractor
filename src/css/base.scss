@@ -108,6 +108,7 @@ main {
   align-items: center;
   display: flex;
 }
+
 .main-card {
   flex-direction: column;
   height: 20vw;
@@ -124,10 +125,10 @@ main {
   width: 100%;
 }
 
-#steps-card-container,
 #hydration-card-container,
+#sleep-card-container,
 #stairs-card-container,
-#sleep-card-container {
+#steps-card-container {
   margin: 0.5vw;
 }
 
@@ -135,14 +136,17 @@ main {
   background-color: $steps;
   grid-area: steps;
 }
+
 #hydration-card-container {
   background-color: $hydration;
   grid-area: hydration;
 }
+
 #stairs-card-container {
   background-color: $stairs;
   grid-area: stairs;
 }
+
 #sleep-card-container {
   background-color: $sleep;
   grid-area: sleep;
@@ -179,9 +183,9 @@ main {
 /* BUTTONS */
 .calendar-button,
 .friends-button,
+.go-back-button,
 .info-button,
-.trending-button,
-.go-back-button {
+.trending-button {
   background-position: center;
   background-size: 3.4vw;
   border: none;
@@ -192,36 +196,38 @@ main {
 }
 
 .hydration-go-back-button,
+.sleep-go-back-button,
 .stairs-go-back-button,
-.steps-go-back-button,
-.sleep-go-back-button {
+.steps-go-back-button {
   @include go-back-image($go-back);
 }
+
 .hydration-info-button,
-.steps-info-button,
+.sleep-info-button,
 .stairs-info-button,
 .steps-info-button,
-.sleep-info-button {
+.steps-info-button {
   @include info-image($info);
 }
 
 .hydration-friends-button,
-.steps-friends-button,
+.sleep-friends-button,
 .stairs-friends-button,
 .steps-friends-button,
-.sleep-friends-button {
+.steps-friends-button {
   @include friends-image($friends);
 }
 
 .hydration-calendar-button,
-.steps-calendar-button,
+.sleep-calendar-button,
 .stairs-calendar-button,
 .steps-calendar-button,
-.sleep-calendar-button {
+.steps-calendar-button {
   @include calendar-image($calendar);
 }
-.steps-trending-button,
-.stairs-trending-button {
+
+.stairs-trending-button,
+.steps-trending-button {
   @include trending-image($trending);
 }
 
@@ -240,17 +246,18 @@ main {
 .yellow-text {
   color: $yellow;
 }
-
 ///// Input section -------
 
 .switch-field {
-  margin: 10px auto 40px auto;
+  margin: 10px auto 40px;
 }
 
-.switch-field input {
-  display: none;
-  border: 0;
-  pointer-events: none;
+.switch-field {
+  input {
+    display: none;
+    border: 0;
+    pointer-events: none;
+  }
 }
 
 .switch-field label {
@@ -261,21 +268,29 @@ main {
   transition: all 0.1s ease-in-out;
 }
 
-.switch-field label:hover {
-  cursor: pointer;
+.switch-field {
+  label:hover {
+    cursor: pointer;
+  }
 }
 
-.switch-field input:checked + label {
-  background-color: #FBD089;
-  box-shadow: none;
+.switch-field {
+  input:checked + label {
+    background-color: #FBD089;
+    box-shadow: none;
+  }
 }
 
-.switch-field label:first-of-type {
-  border-radius: 6px 0 0 6px;
+.switch-field {
+  label:first-of-type {
+    border-radius: 6px 0 0 6px;
+  }
 }
 
-.switch-field label:last-of-type {
-  border-radius: 0 6px 6px 0;
+.switch-field {
+  label:last-of-type {
+    border-radius: 0 6px 6px 0;
+  }
 }
 
 .activity-toggle {
@@ -291,36 +306,44 @@ main {
   color: white;
 }
 
-.sleep-input ul,
-.activity-input ul,
-.hydration-input ul {
-  list-style: none;
-  width: 500px;
-  margin: auto;
-  background-color: white;
-  padding: 20px;
+.activity-input,
+.hydration-input,
+.sleep-input {
+  ul {
+    list-style: none;
+    width: 500px;
+    margin: auto;
+    background-color: white;
+    padding: 20px;
+  }
 }
 
-.sleep-input label,
-.activity-input label,
-.hydration-input label {
-  display: inline-block;
-  margin-left: 30px;
+.activity-input,
+.hydration-input,
+.sleep-input {
+  label {
+    display: inline-block;
+    margin-left: 30px;
+  }
 }
 
-.sleep-input input,
-.activity-input input,
-.hydration-input input {
-  float: right;
-  margin-right: 50px;
-  height: 30px;
-  width: 130px;
+.activity-input,
+.hydration-input,
+.sleep-input {
+  input {
+    float: right;
+    margin-right: 50px;
+    height: 30px;
+    width: 130px;
+  }
 }
 
-.sleep-input li,
-.hydration-input li,
-.activity-input li {
-  margin: 15px 0px;
+.activity-input,
+.hydration-input,
+.sleep-input {
+  li {
+    margin: 15px 0;
+  }
 }
 
 .input-container button {
