@@ -31,9 +31,8 @@ fetchData().then(response => {
   .catch(err => console.log(err))
 
 let generateUser = () => {
-  let random = Math.floor(Math.random() * data.userRepository.users.length)
+  let random = Math.floor(Math.random() * 50)
   data.user = data.userRepository.users[random]
-  data.user.calculateAverageHoursThisWeek(data.todayDate);
 }
 
 let createTodayDate = () => {
