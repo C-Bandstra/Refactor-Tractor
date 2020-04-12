@@ -9,8 +9,8 @@
 }
 
 body {
-  background-color: #1F1F1F;
-  font-family: 'Oswald', sans-serif;
+  background-color: $body;
+  font-family: $main-text;
 }
 /* HEADER */
 header {
@@ -24,7 +24,7 @@ button:active {
 }
 
 #profile-button {
-  background-image: url("../images/profile.png");
+  @include profile-image($profile);
   background-position: center;
   background-size: 5.6vw;
   border: none;
@@ -37,7 +37,7 @@ button:active {
 }
 
 #user-info-dropdown {
-  background-color: #1F1F1F;
+  background-color: $body;
   color: white;
   margin-left: 60%;
   margin-top: -1.2%;
@@ -69,7 +69,7 @@ h2 {
 
 h3 {
   display: inline;
-  font-family: 'Work Sans', sans-serif;
+  font-family: $main-text;
   font-size: 3vw;
   font-weight: 700;
   letter-spacing: 0.2em;
@@ -86,7 +86,7 @@ h5 {
 }
 
 p {
-  font-family: 'Work Sans', sans-serif;
+  font-family: $secondary-text;
   font-size: 1.2vw;
   font-weight: 600;
   letter-spacing: 0.2vw;
@@ -130,26 +130,6 @@ main {
 #sleep-card-container {
   margin: 0.5vw;
 }
-
-// #steps-card-container {
-//   background-color: #F5634B;
-//   grid-area: steps;
-// }
-//
-// #hydration-card-container {
-//   background-color: #54C6BE;
-//   grid-area: hydration;
-// }
-//
-// #stairs-card-container {
-//   background-color: #8975B2;
-//   grid-area: stairs;
-// }
-//
-// #sleep-card-container {
-//   background-color: #FBD089;
-//   grid-area: sleep;
-// }
 
 #steps-card-container {
   background-color: $steps;
@@ -215,7 +195,6 @@ main {
 .stairs-go-back-button,
 .steps-go-back-button,
 .sleep-go-back-button {
-  // background-image: url("../images/steps-goback.png");
   @include go-back-image($go-back);
 }
 .hydration-info-button,
@@ -245,78 +224,7 @@ main {
 .stairs-trending-button {
   @include trending-image($trending);
 }
-// .steps-go-back-button {
-//   background-image: url("../images/steps-goback.png");
-// }
-//
-// .steps-info-button {
-//   background-image: url("../images/steps-info.png");
-// }
-//
-// .steps-friends-button {
-//   background-image: url("../images/steps-friends.png");
-// }
-//
-// .steps-calendar-button {
-//   background-image: url("../images/steps-calendar.png");
-// }
-//
-// .hydration-go-back-button {
-//   background-image: url("../images/hydration-goback.png");
-// }
-//
-// .hydration-info-button {
-//   background-image: url("../images/hydration-info.png");
-// }
-//
-// .hydration-friends-button {
-//   background-image: url("../images/hydration-friends.png");
-// }
-//
-// .hydration-calendar-button {
-//   background-image: url("../images/hydration-calendar.png");
-// }
-//
-// .stairs-go-back-button {
-//   background-image: url("../images/stairs-goback.png");
-// }
-//
-// .stairs-info-button {
-//   background-image: url("../images/stairs-info.png");
-// }
-//
-// .stairs-friends-button {
-//   background-image: url("../images/stairs-friends.png");
-// }
-//
-// .stairs-calendar-button {
-//   background-image: url("../images/stairs-calendar.png");
-// }
-//
-// .sleep-go-back-button {
-//   background-image: url("../images/sleep-goback.png");
-// }
-//
-// .sleep-info-button {
-//   background-image: url("../images/sleep-info.png");
-// }
-//
-// .sleep-friends-button {
-//   background-image: url("../images/sleep-friends.png");
-// }
-//
-// .sleep-calendar-button {
-//   background-image: url("../images/sleep-calendar.png");
-// }
-//
-// .steps-trending-button {
-//   background-image: url("../images/steps-trending.png");
-// }
-//
-// .stairs-trending-button {
-//   background-image: url("../images/stairs-trending.png");
-// }
-/* CHANGING CLASSES */
+
 .hide {
   display: none;
 }
