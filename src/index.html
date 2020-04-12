@@ -230,5 +230,63 @@
         </section>
       </section>
     </main>
+    <section class="input-container">
+      <form class="activity-toggle">
+      <h2 class="input-header">Add your daily accomplishments.</h2>
+        <div class="switch-field">
+          <input type="radio" id="sleep" name="daily-activity" value="yes" checked/>
+          <label class="sleep-button" for="sleep">Sleep</label>
+          <input type="radio" id="activity" name="daily-activity" value="activity" />
+          <label class="activity-button" for="activity">Activity</label>
+          <input type="radio" id="hydration" name="daily-activity" value="hydration" />
+          <label class="hydration-button" for="hydration">Hydration</label>
+        </div>
+      </form>
+      <!-- <form class="activity-input" action="tk" method="post"> -->
+      <ul class="sleep-input">
+        <li>
+          <label for="date">Date:</label>
+          <input type="date" id="sleep-date" name="date">
+        </li>
+        <li>
+          <label for="sleep-hours">Hours of sleep:</label>
+          <input type="number" min="0" id="sleep-hours" name="sleep-hours">
+        </li>
+        <li>
+          <label for="sleep-quality">Quality of sleep:</label>
+          <input type="number" min="0" max="5" id="sleep-quality" name="sleep-quality">
+        </li>
+        <button class="sleep-submit-btn">Submit</button>
+      </ul>
+      <ul class="activity-input">
+        <li>
+          <label for="date">Date:</label>
+          <input type="date" id="activity-date" name="date">
+        </li>
+        <li>
+          <label for="total-steps">Steps:</label>
+          <input type="number" min="0" id="total-steps" name="total-steps">
+        </li>
+        <li>
+          <label for="stair-flights">Flights of stairs:</label>
+          <input type="number" min="0" id="stair-flights" name="stair-flights">
+        </li>
+          <label for="minutes-active">Minutes active:</label>
+          <input type="number" min="0" id="minutes-active" name="minutes-active">
+        </li>
+        <button class="activity-submit-btn">Submit</button>
+      </ul>
+      <ul class="hydration-input">
+        <li>
+          <label for="date">Date:</label>
+          <input type="date" id="hydrate-date" name="date">
+        </li>
+        <li>
+          <label for="total-ounces">Ounces of water:</label>
+          <input type="number" id="total-ounces" min="0" name="water-ounces">
+        </li>
+        <button class="hydration-submit-btn">Submit</button>
+      </ul>
+    </section>
   </body>
 </html>

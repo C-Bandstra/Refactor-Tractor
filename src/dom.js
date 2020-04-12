@@ -16,6 +16,9 @@ const dom = {
     this.changeHydration(data);
     this.changeStairs(data);
     this.populateNavBar(data);
+    this.hideInputs();
+    console.log(data.user);
+    console.log(data.userRepository);
   },
 
   changeSteps(data) {
@@ -77,10 +80,7 @@ const dom = {
   },
 
   addSleepInfo(data) {
-    //this is calculating the avg for every user, so it's not happening in time
-    //to print
     $('#sleep-info-hours-average-alltime').text(data.user.hoursSleptAverage);
-    // $('#sleep-info-hours-average-alltime').text('catsssss');
     $('#sleep-info-quality-average-alltime').text(data.user.sleepQualityAverage);
   },
 
@@ -112,10 +112,10 @@ const dom = {
       return hydration.userID === data.user.id && hydration.date === data.todayDate;
     }).numOunces);
   },
-
-  // addHydrationCalendar(data) {
-  //   sortedHydrationDataByDate
-  //   },
+//
+//   addHydrationCalendar(data) {
+//
+// },
     //
     // addHydrationInfo(data) {
 
@@ -172,84 +172,15 @@ const dom = {
     $('#dropdown-goal').text(`DAILY STEP GOAL | ${data.user.dailyStepGoal}`);
     $('#dropdown-email').text(`EMAIL | ${data.user.email}`)
     $('#dropdown-name').text(`${data.user.name.toUpperCase()}`)
+  },
+
+  hideInputs() {
+    $('.activity-input').addClass('hide')
+    $('.hydration-input').addClass('hide')
   }
+
 };
 
-$('#profile-button').on('click', function(event) {
-  $('#user-info-dropdown').toggleClass('hide');
-  $('#user-info-dropdown').toggleClass('hide');
-  })
-
-function flipCard(cardToHide, cardToShow) {
-  cardToHide.classList.add('hide');
-  cardToShow.classList.remove('hide');
-}
-
-$('.main').on('click', function(event) {
-  if (event.target.parentNode.parentNode.id == 'stairs-main-card' ||
-    $(event.target).hasClass('go-back-button')) {
-    clickStairsCard(event);
-  }
-  if (event.target.parentNode.parentNode.id == 'steps-main-card' ||
-    $(event.target).hasClass('go-back-button')) {
-    clickStepsCard(event);
-  }
-  if (event.target.parentNode.parentNode.id == 'hydration-main-card' ||
-    $(event.target).hasClass('go-back-button')) {
-    clickHydrationCard(event);
-  }
-  if (event.target.parentNode.parentNode.id == 'sleep-main-card' ||
-    $(event.target).hasClass('go-back-button')) {
-    clickSleepCard(event);
-  }
-})
-
-function clickStairsCard(event) {
-  let stairsMainCard = $('#stairs-main-card');
-  let buttonCard = $(`#${event.target.dataset.card}-card`);
-  if ($(event.target).hasClass(`${event.target.dataset.card}-button`) &&
-    event.target.dataset.card !== 'go-back') {
-    flipCard(stairsMainCard[0], buttonCard[0]);   }
-  if ($(event.target).hasClass('stairs-go-back-button')) {
-    flipCard(event.target.parentNode, stairsMainCard[0]);
-  }
-}
-
-function clickStepsCard(event) {
-  let stepsMainCard = $('#steps-main-card');
-  let buttonCard = $(`#${event.target.dataset.card}-card`);
-  if ($(event.target).hasClass(`${event.target.dataset.card}-button`) &&
-    event.target.dataset.card !== 'go-back') {
-    flipCard(stepsMainCard[0], buttonCard[0]);
-  }
-  if ($(event.target).hasClass('steps-go-back-button')) {
-    flipCard(event.target.parentNode, stepsMainCard[0]);
-  }
-}
-
-function clickHydrationCard(event) {
-  let hydrationMainCard = $('#hydration-main-card');
-  let buttonCard = $(`#${event.target.dataset.card}-card`);
-  if ($(event.target).hasClass(`${event.target.dataset.card}-button`) &&
-    event.target.dataset.card !== 'go-back') {
-    flipCard(hydrationMainCard[0], buttonCard[0]);
-  }
-  if ($(event.target).hasClass('hydration-go-back-button'))  {
-    flipCard(event.target.parentNode, hydrationMainCard[0]);
-  }
-}
-
-function clickSleepCard(event) {
-  let sleepMainCard = $('#sleep-main-card');
-  let buttonCard = $(`#${event.target.dataset.card}-card`);
-  if ($(event.target).hasClass(`${event.target.dataset.card}-button`) &&
-    event.target.dataset.card !== 'go-back') {
-    flipCard(sleepMainCard[0], buttonCard[0]);
-  }
-  if ($(event.target).hasClass('sleep-go-back-button')) {
-    flipCard(event.target.parentNode, sleepMainCard[0]);
-  }
-}
 
 // ----- I think we can delete the following:
 

@@ -332,3 +332,91 @@ main {
 .yellow-text {
   color: $yellow;
 }
+
+///// Input section -------
+
+.switch-field {
+  margin: 10px auto 40px auto;
+}
+
+.switch-field input {
+  display: none;
+  border: 0;
+  pointer-events: none;
+}
+
+.switch-field label {
+  background-color: $h1-color;
+  font-size: 16px;
+  text-align: center;
+  padding: 10px 20px;
+  transition: all 0.1s ease-in-out;
+}
+
+.switch-field label:hover {
+  cursor: pointer;
+}
+
+.switch-field input:checked + label {
+  background-color: #FBD089;
+  box-shadow: none;
+}
+
+.switch-field label:first-of-type {
+  border-radius: 6px 0 0 6px;
+}
+
+.switch-field label:last-of-type {
+  border-radius: 0 6px 6px 0;
+}
+
+.activity-toggle {
+  display: block;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.input-header {
+  padding: 30px;
+  font-size: 20px;
+  margin: 0 auto;
+  color: white;
+}
+
+.sleep-input,
+.activity-input,
+.hydration-input {
+  list-style: none;
+  width: 500px;
+  margin: auto;
+  background-color: white;
+  padding: 20px;
+}
+
+.sleep-input label,
+.activity-input label,
+.hydration-input label {
+  display: inline-block;
+  margin-left: 30px;
+}
+
+.sleep-input input,
+.activity-input input,
+.hydration-input input {
+  float: right;
+  margin-right: 50px;
+  height: 30px;
+  width: 130px;
+}
+
+.sleep-input li,
+.hydration-input li,
+.activity-input li {
+  margin: 15px 0px;
+}
+
+.input-container button {
+  padding: 5px 10px;
+  cursor: pointer;
+  margin: 10px 350px;
+}
