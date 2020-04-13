@@ -35,7 +35,7 @@ class User {
       this.ouncesAverage = amount;
     }
   }
-  
+
   addDailyOunces(date) {
     return this.ouncesRecord.reduce((sum, record) => {
       let amount = record[date];
@@ -96,7 +96,7 @@ class User {
   findTrending(trending, unit, act) {
     let positiveDays = [];
     for (var i = 0; i < this.activityRecord.length; i++) {
-      if (this.activityRecord[i + 1] && this.activityRecord[i].steps > this.activityRecord[i + 1][unit]) {
+      if (this.activityRecord[i + 1] && this.activityRecord[i][unit] > this.activityRecord[i + 1][unit]) {
         positiveDays.unshift(this.activityRecord[i].date);
       } else if (positiveDays.length > 2) {
         this[trending].push(`Your most recent positive ${act} streak was ${positiveDays[0]} - ${positiveDays[positiveDays.length - 1]}!`);

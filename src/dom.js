@@ -1,25 +1,15 @@
-// import './css/base.scss';
-import './css/styles.scss';
-
+import './css/base.scss';
 import $ from "jQuery"
-
-// let activityData;	import userData from './data/users';
-// let hydrationData;	import activityData from './data/activity';
-// let sleepData;	import sleepData from './data/sleep';
-// import hydrationData from './data/hydration';
 
 const dom = {
 
   load(data) {
+    this.hideInputs();
     this.changeSteps(data);
     this.changeSleep(data);
     this.changeHydration(data);
     this.changeStairs(data);
     this.populateNavBar(data);
-    this.hideInputs();
-    console.log(data.user);
-    console.log(data.userRepository);
-    console.log(data.sleepData);
   },
 
   changeSteps(data) {
@@ -86,7 +76,6 @@ const dom = {
   },
 
   addSleepCalendar(data) {
-    //same as above
     $('#sleep-calendar-hours-average-weekly').text(data.user.calculateWeeklyAverage(data.user.sleepHoursRecord, 'hours', data.todayDate));
     $('#sleep-calendar-quality-average-weekly').text(data.user.calculateWeeklyAverage(data.user.sleepQualityRecord, 'quality', data.todayDate));
   },
@@ -102,8 +91,7 @@ const dom = {
 
   changeHydration(data) {
     this.addUserHydration(data);
-    // this.addHydrationCalendar(data);
-    // this.addHydrationInfo(data);
+    this.addHydrationCalendar(data);
     this.addUserGlasses(data);
     this.addFriendHydration(data);
   },
@@ -113,14 +101,25 @@ const dom = {
       return hydration.userID === data.user.id && hydration.date === data.todayDate;
     }).numOunces);
   },
-  //
-  //   addHydrationCalendar(data) {
-  //
-  // },
-  //
-  // addHydrationInfo(data) {
 
-  //   },
+  addHydrationCalendar(data) {
+    let todayOz = data.user.ouncesRecord.filter(date => date[data.todayDate]);
+    let index = data.user.ouncesRecord.indexOf(todayOz[0])
+    let lastIndex = index + 7
+    let weekAmts = data.user.ouncesRecord.slice(index + 1, lastIndex)
+    this.displayHydrationCalendar(weekAmts);
+  },
+
+  displayHydrationCalendar(weekAmts) {
+    weekAmts.forEach(amt => {
+      let day = weekAmts.indexOf(amt) + 1
+      let keys = Object.keys(amt);
+      $('#hydration-calendar-card').append(`<div class='hydration-data-line'>
+      <p class='hydration-weekly-label'>${day} DAYS AGO: </p>
+      <h4 class='hydration-weekly-amount'><span class='daily-oz' id='hydration-calendar-ounces-1day'></span>${amt[keys[0]]} oz</h4>
+      </div>`)
+    })
+  },
 
   addUserGlasses(data) {
     $('#hydration-info-glasses-today').text(data.hydrationData.find(hydration => {
@@ -174,6 +173,7 @@ const dom = {
     $('#dropdown-email').text(`EMAIL | ${data.user.email}`)
     $('#dropdown-name').text(`${data.user.name.toUpperCase()}`)
     this.addProfileStats(data);
+    this.changeDropdownColor();
   },
 
   addProfileStats(data) {
@@ -184,127 +184,23 @@ const dom = {
     });
     data.user.calculateTotalStepsThisWeek(data.todayDate);
     $('#dropdown-friends-steps-container').prepend(`
-    <p class='dropdown-p friends-steps'>${data.user.name} |  ${data.user.totalStepsThisWeek}</p>
+    <p class='dropdown-p friends-steps'>YOU |  ${data.user.totalStepsThisWeek}</p>
   `);
   },
-
-
 
   hideInputs() {
     $('.activity-input').addClass('hide')
     $('.hydration-input').addClass('hide')
+  },
+
+  changeDropdownColor() {
+    let friendsStepsParagraphs = $('#dropdown-friends-steps-container').children();
+    friendsStepsParagraphs[0].classList.add('yellow-text');
+    friendsStepsParagraphs[1].classList.add('red-text');
+    friendsStepsParagraphs[(friendsStepsParagraphs.length - 1)].classList.add('green-text');
   }
 
-
-
 };
-
-
-// ----- I think we can delete the following:
-
-//Add current class and pass in current class as parameter.
-
-// function updateTrendingStairsDays() {
-//   user.findTrendingStairsDays();
-//   trendingStairsPhraseContainer.innerHTML = `<p class='trend-line'>${user.trendingStairsDays[0]}</p>`;
-// }
-
-// function updateTrendingStepDays() {
-//   user.findTrendingStepDays();
-//   trendingStepsPhraseContainer.innerHTML = `<p class='trend-line'>${user.trendingStepDays[0]}</p>`;
-// }
-
-
-// $('#hydration-user-ounces-today').text(hydrationData.find(hydration => {
-//   return hydration.userID === user.id && hydration.date === todayDate;
-// }).numOunces);
-// $('#hydration-friend-ounces-today').text(userRepository.calculateAverageDailyWater(todayDate));
-// $('#hydration-info-glasses-today').text(hydrationData.find(hydration => {
-//     return hydration.userID === user.id && hydration.date === todayDate;
-//   }).numOunces / 8)
-//
-//
-// $('#stairs-calendar-flights-average-weekly').text(user.calculateAverageFlightsThisWeek(todayDate));
-// $('#stairs-calendar-stairs-average-weekly').text((user.calculateAverageFlightsThisWeek(todayDate) * 12).toFixed(0));
-// $('#stairs-friend-flights-average-today').text((userRepository.calculateAverageStairs(todayDate) / 12).toFixed(1));
-// $('#stairs-info-flights-today').text(data.activityData.find(activity => {
-//     return activity.userID === user.id && activity.date === todayDate;
-//   }).flightsOfStairs);
-// $('#stairs-user-stairs-today').text(data.activityData.find(activity => {
-//     return activity.userID === user.id && activity.date === todayDate;
-//   }).flightsOfStairs * 12);
-// $('.stairs-trending-button').on('click', function() {
-//   user.findTrendingStairsDays();
-//   $('.trending-stairs-phrase-container').html(`<p class='trend-line'>${user.trendingStairsDays[0]}</p>`);
-//   });
-
-//
-// user.friendsActivityRecords.forEach(friend => {
-//   dropdownFriendsStepsContainer.innerHTML += `
-//   <p class='dropdown-p friends-steps'>${friend.firstName} |  ${friend.totalWeeklySteps}</p>
-//   `;
-// });
-
-// let friendsStepsParagraphs = document.querySelectorAll('.friends-steps');
-//
-// friendsStepsParagraphs.forEach(paragraph => {
-//   if (friendsStepsParagraphs[0] === paragraph) {
-//     paragraph.classList.add('green-text');
-//   }
-//   if (friendsStepsParagraphs[friendsStepsParagraphs.length - 1] === paragraph) {
-//     paragraph.classList.add('red-text');
-//   }
-//   if (paragraph.innerText.includes('YOU')) {
-//     paragraph.classList.add('yellow-text');
-//   }
-// });
-
-// let user = userRepository.users[0];
-// let todayDate = "2019/09/22";
-// user.findFriendsNames(userRepository.users);
-
-// //JQuery to taget elements
-
-// let dailyOz = document.querySelectorAll('.daily-oz');
-// let dropdownFriendsStepsContainer = document.querySelector('#dropdown-friends-steps-container');
-// let dropdownGoal = document.querySelector('#dropdown-goal');
-// let hydrationCalendarCard = document.querySelector('#hydration-calendar-card');
-// let hydrationFriendsCard = document.querySelector('#hydration-friends-card');
-// let hydrationInfoCard = document.querySelector('#hydration-info-card');
-// let hydrationMainCard = document.querySelector('#hydration-main-card');
-// let mainPage = document.querySelector('main');
-// let profileButton = document.querySelector('#profile-button');
-// let sleepCalendarCard = document.querySelector('#sleep-calendar-card');
-// let sleepFriendsCard = document.querySelector('#sleep-friends-card');
-// let sleepInfoCard = document.querySelector('#sleep-info-card');
-// let sleepMainCard = document.querySelector('#sleep-main-card');
-// let sortedHydrationDataByDate = data.user.ouncesRecord.sort((a, b) => {
-//   if (Object.keys(a)[0] > Object.keys(b)[0]) {
-//     return -1;
-//   }
-//   if (Object.keys(a)[0] < Object.keys(b)[0]) {
-//     return 1;
-//   }
-//   return 0;
-// });
-// let stairsCalendarCard = document.querySelector('#stairs-calendar-card');
-// let stepsMainCard = document.querySelector('#steps-main-card');
-// let stepsInfoCard = document.querySelector('#steps-info-card');
-// let stepsFriendsCard = document.querySelector('#steps-friends-card');
-// let stepsTrendingCard = document.querySelector('#steps-trending-card');
-// let stepsCalendarCard = document.querySelector('#steps-calendar-card');
-// let stairsFriendsCard = document.querySelector('#stairs-friends-card');
-// let stairsInfoCard = document.querySelector('#stairs-info-card');
-// // let stairsMainCard = document.querySelector('#stairs-main-card');
-// let stairsTrendingButton = document.querySelector('.stairs-trending-button');
-// let stairsTrendingCard = document.querySelector('#stairs-trending-card');
-// let trendingStepsPhraseContainer = document.querySelector('.trending-steps-phrase-container');
-// let userInfoDropdown = document.querySelector('#user-info-dropdown');
-
-//JQuery on click to invoke functions
-
-// mainPage.addEventListener('click', showInfo);
-// profileButton.addEventListener('click', showDropdown);
 
 
 export default dom;
