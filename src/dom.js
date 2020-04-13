@@ -50,10 +50,10 @@ const dom = {
 
   addStepInfo(data) {
     $('#steps-info-miles-walked-today').text(data.user.activityRecord.find(activity => {
-     return (activity.date === data.todayDate && activity.user.id === data.user.id)
+      return (activity.date === data.todayDate && activity.user.id === data.user.id)
     }).calculateMiles())
     $('#steps-info-active-minutes-today').text(data.activityData.find(activity => {
-     return activity.userID === data.user.id && activity.date === data.todayDate;
+      return activity.userID === data.user.id && activity.date === data.todayDate;
     }).minutesActive);
   },
 
@@ -113,14 +113,14 @@ const dom = {
       return hydration.userID === data.user.id && hydration.date === data.todayDate;
     }).numOunces);
   },
-//
-//   addHydrationCalendar(data) {
-//
-// },
-    //
-    // addHydrationInfo(data) {
+  //
+  //   addHydrationCalendar(data) {
+  //
+  // },
+  //
+  // addHydrationInfo(data) {
 
-      //   },
+  //   },
 
   addUserGlasses(data) {
     $('#hydration-info-glasses-today').text(data.hydrationData.find(hydration => {
@@ -154,8 +154,8 @@ const dom = {
   addStairTrending(data) {
     $('.stairs-trending-button').on('click', function() {
       data.user.findTrending('trendingStairsDays', 'flightsOfStairs', 'climbing');
-        $('.trending-stairs-phrase-container').html(`<p class='trend-line'>${data.user.trendingStairsDays[0]}</p>`);
-      });
+      $('.trending-stairs-phrase-container').html(`<p class='trend-line'>${data.user.trendingStairsDays[0]}</p>`);
+    });
   },
 
   stairFriendsInfo(data) {
@@ -173,12 +173,29 @@ const dom = {
     $('#dropdown-goal').text(`DAILY STEP GOAL | ${data.user.dailyStepGoal}`);
     $('#dropdown-email').text(`EMAIL | ${data.user.email}`)
     $('#dropdown-name').text(`${data.user.name.toUpperCase()}`)
+    this.addProfileStats(data);
   },
+
+  addProfileStats(data) {
+    data.user.friendsActivityRecords.forEach(friend => {
+      $('#dropdown-friends-steps-container').append(`
+    <p class='dropdown-p friends-steps'>${friend.name} |  ${friend.steps}</p>
+    `);
+    });
+    data.user.calculateTotalStepsThisWeek(data.todayDate);
+    $('#dropdown-friends-steps-container').prepend(`
+    <p class='dropdown-p friends-steps'>${data.user.name} |  ${data.user.totalStepsThisWeek}</p>
+  `);
+  },
+
+
 
   hideInputs() {
     $('.activity-input').addClass('hide')
     $('.hydration-input').addClass('hide')
   }
+
+
 
 };
 

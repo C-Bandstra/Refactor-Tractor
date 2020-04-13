@@ -13,9 +13,15 @@ $info: '../images/info.png';
 $friends: '../images/friends.png';
 $calendar: '../images/calendar.png';
 $trending: '../images/trending.png';
+$profile: '../images/profile.png';
 $main-text: Oswald, sans-serif;
 $secondary-text: Work Sans, sans-serif;
 //Functions
+
+@mixin profile-image($profile){
+  background-image: url($profile);
+  background-color: inherit;
+}
 @mixin go-back-image($go-back) {
   background-image: url($go-back);
   background-color: inherit;
