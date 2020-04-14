@@ -1,4 +1,3 @@
-import sleepData from './data/sleep';
 import User from './User';
 import Activity from './Activity';
 import Hydration from './Hydration';
@@ -72,7 +71,7 @@ class UserRepository {
     let todaysDrinkers = this.users.filter(user => {
       return user.addDailyOunces(date) > 0;
     });
-    
+
     let sumDrankOnDate = todaysDrinkers.reduce((sum, drinker) => {
       return sum += drinker.addDailyOunces(date);
     }, 0)
@@ -86,14 +85,14 @@ class UserRepository {
   }
 
   getLongestSleepers(date) {
-    return this.find(sleepData, date)
+    return this.find(this.sleepData, date)
       .sort((a, b) => {
         return b.hoursSlept - a.hoursSlept;
       })[0].userID;
   }
 
   getWorstSleepers(date) {
-    return this.find(sleepData, date)
+    return this.find(this.sleepData, date)
       .sort((a, b) => {
         return a.hoursSlept - b.hoursSlept;
       })[0].userID;
