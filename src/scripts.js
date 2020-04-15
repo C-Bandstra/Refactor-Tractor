@@ -2,8 +2,6 @@ import fetchData from './allData.js'
 import UserRepository from './UserRepository';
 import dom from './dom.js';
 import $ from "jQuery"
-// import styles from './css/styles.scss';
-// import './css/base.scss';
 import './css/base.scss';
 
 const data = {
