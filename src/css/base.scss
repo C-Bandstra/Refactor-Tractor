@@ -221,9 +221,9 @@ main {
 .hydration-calendar-button,
 .sleep-calendar-button,
 .stairs-calendar-button,
-.steps-calendar-button,
 .steps-calendar-button {
   @include calendar-image($calendar);
+  float: right;
 }
 
 .stairs-trending-button,

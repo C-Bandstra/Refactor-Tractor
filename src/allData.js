@@ -22,17 +22,17 @@ function fetchData() {
     .then(response => {
       return response.sleepData
     })
-   
+
 
   return Promise.all([userData, activityData, hydrationData, sleepData]).then(data => {
-
+    // data = array of objects
     let allData = {}
 
     allData.userData = data[0]
     allData.activityData = data[1]
     allData.hydrationData = data[2]
     allData.sleepData = data[3]
-    
+
     return allData
   })
 }
